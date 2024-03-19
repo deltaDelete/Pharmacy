@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import ru.deltadelete.pharmacy.R
-import ru.deltadelete.pharmacy.api.Drug
+import ru.deltadelete.pharmacy.api.dto.Drug
 import ru.deltadelete.pharmacy.databinding.DrugItemBinding
 
 class DrugAdapter(
@@ -26,7 +26,7 @@ class DrugAdapter(
                 .into(binding.drugImage)
 
             binding.textviewDrugName.text = item.name
-            binding.textviewDrugPrice.text = String.format("%.2f₽", item.price)
+            binding.textviewDrugPrice.text = String.format("%.2f₽", item)
         }
     }
 
