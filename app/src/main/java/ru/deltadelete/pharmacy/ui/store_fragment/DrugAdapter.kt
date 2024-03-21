@@ -20,11 +20,6 @@ class DrugAdapter(
     ) {
         private val radius = binding.root.context.resources.getDimension(R.dimen.eight).toInt()
         fun bind(item: Drug) {
-            Glide.with(binding.root)
-                .load(item.image)
-                .transform(RoundedCorners(radius))
-                .into(binding.drugImage)
-
             binding.textviewDrugName.text = item.name
             binding.textviewDrugPrice.text = String.format("%.2f₽", item)
         }

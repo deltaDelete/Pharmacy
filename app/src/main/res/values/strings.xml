@@ -2,12 +2,12 @@
     <string name="app_name">Pharmacy</string>
     <string name="action_settings">Settings</string>
     <!-- Strings used for fragments for navigation -->
-    <string name="store_fragment_label">Склад</string>
-    <string name="second_fragment_label">Second Fragment</string>
+    <string name="store_fragment_label">Warehouse</string>
+    <string name="arrival_fragment_label">Arrival</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
 
-    <string name="lorem_ipsum">
+    <string name="lorem_ipsum" translatable="false">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris
         volutpat, dolor id interdum ullamcorper, risus dolor egestas lectus, sit amet mattis purus
         dui nec risus. Maecenas non sodales nisi, vel dictum dolor. Class aptent taciti sociosqu ad
@@ -43,4 +43,6 @@
         libero vel nunc consequat, quis tincidunt nisl eleifend. Cras bibendum enim a justo luctus
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
+    <string name="placeholder" translatable="false">Placeholder</string>
+    <string name="info">Information</string>
 </resources>

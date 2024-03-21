@@ -2,13 +2,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@id/FirstFragment"
-        android:title="First"
+        android:id="@id/StoreFragment"
+        android:title="@string/store_fragment_label"
         app:showAsAction="always"
         android:icon="@drawable/shopping_bag" />
     <item
-        android:id="@id/SecondFragment"
-        android:title="Second"
+        android:id="@id/ArrivalFragment"
+        android:title="@string/arrival_fragment_label"
         app:showAsAction="always"
-        android:icon="@drawable/shopping_cart" />
+        android:icon="@drawable/add_circle" />
 </menu>

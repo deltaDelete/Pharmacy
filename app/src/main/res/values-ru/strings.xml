@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Аптека</string>
+    <string name="action_settings">Настройки</string>
+    <string name="store_fragment_label">Склад</string>
+    <string name="arrival_fragment_label">Поставка</string>
+    <string name="next">Следующий</string>
+    <string name="previous">Предыдущий</string>
+    <string name="info">Информация</string>
+</resources>

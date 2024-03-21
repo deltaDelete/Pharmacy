@@ -4,23 +4,26 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.res.ResourcesCompat
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.viewModelScope
+import androidx.navigation.fragment.findNavController
 import androidx.paging.PagingData
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.GridLayoutManager.SpanSizeLookup
+import androidx.recyclerview.widget.DividerItemDecoration
+import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.google.android.flexbox.AlignItems
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexWrap
 import com.google.android.flexbox.FlexboxLayoutManager
+import com.google.android.flexbox.JustifyContent
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import ru.deltadelete.pharmacy.R
 import ru.deltadelete.pharmacy.api.ApiClient
 import ru.deltadelete.pharmacy.api.dto.Drug
 import ru.deltadelete.pharmacy.databinding.FragmentStoreBinding
@@ -47,8 +50,32 @@ class StoreFragment : Fragment() {
         // https://github.com/google/flexbox-layout
         binding.recyclerView.layoutManager =
             FlexboxLayoutManager(context, FlexDirection.ROW, FlexWrap.WRAP).apply {
-                alignItems = AlignItems.FLEX_START
+                // По дополнительной оси, т.е. вертикально
+                alignItems = AlignItems.STRETCH
+                // По главное оси, в данном случае row, т.е. горизонтально
+                justifyContent = JustifyContent.CENTER
             }
+
+        binding.recyclerView.addItemDecoration(
+            DividerItemDecoration(
+                context,
+                DividerItemDecoration.HORIZONTAL
+            ).apply {
+                ResourcesCompat.getDrawable(context.resources, R.drawable.divider, null)?.let {
+                    this.setDrawable(it)
+                }
+            }
+        )
+        binding.recyclerView.addItemDecoration(
+            DividerItemDecoration(
+                context,
+                DividerItemDecoration.VERTICAL
+            ).apply {
+                ResourcesCompat.getDrawable(context.resources, R.drawable.divider, null)?.let {
+                    this.setDrawable(it)
+                }
+            }
+        )
 
         initRecyclerView()
         collectUiState()
@@ -57,13 +84,30 @@ class StoreFragment : Fragment() {
     private fun collectUiState() {
         lifecycleScope.launch(Dispatchers.IO) {
             viewModel.getDrugs().collectLatest {
+                binding.root.isRefreshing = false
                 adapter.submitData(it)
             }
         }
     }
 
     private fun initRecyclerView() {
-        adapter = DrugAdapter()
+        binding.root.isRefreshing = true
+        binding.root.setOnRefreshListener {
+            adapter.refresh()
+        }
+        binding.root.setColorSchemeColors(0x0099cc)
+        adapter = DrugAdapter().apply {
+            onItemClick = { item, _ ->
+                val itemAsJson = jacksonObjectMapper().writeValueAsString(item)
+                findNavController().navigate(
+                    R.id.action_storeFragment_to_drugInfoFragment,
+                    bundleOf("item" to itemAsJson)
+                )
+            }
+        }
+        adapter.addOnPagesUpdatedListener {
+            binding.root.isRefreshing = false
+        }
         binding.recyclerView.adapter = adapter
     }
 }

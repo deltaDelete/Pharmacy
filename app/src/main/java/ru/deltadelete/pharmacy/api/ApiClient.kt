@@ -12,7 +12,7 @@ object ApiClient {
     }
 
     val retrofit: Retrofit = Retrofit.Builder()
-        .baseUrl("http://localhost:3001/api/pharmacy/")
+        .baseUrl("http://192.168.1.43:3001/api/pharmacy/")
         .addConverterFactory(JacksonConverterFactory.create(jacksonObjectMapper()))
         .build()
 

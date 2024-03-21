@@ -1,5 +1,6 @@
 package ru.deltadelete.pharmacy.api.dto
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonProperty
 
 data class Drug(
@@ -10,5 +11,6 @@ data class Drug(
     val price: Float
 ) {
     val image: String
+        @JsonIgnore
         get() = "http://localhost:3001/api/pharmacy/drug/$id/image"
 }

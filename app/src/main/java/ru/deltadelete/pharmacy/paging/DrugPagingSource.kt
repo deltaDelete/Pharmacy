@@ -18,24 +18,24 @@ class DrugPagingSource(
     override suspend fun load(params: LoadParams<Long>): LoadResult<Long, Drug> {
         try {
 
-        val currentKey = params.key ?: 0
+            val currentKey = params.key ?: 0
 
-        val response = service.getDrugList(params.loadSize.toLong(), currentKey).execute()
-        val drugs = response.body()
-        val nextKey = if (drugs.isNullOrEmpty()) {
-            null
-        } else {
-            (currentKey + params.loadSize)
-        }
+            val response = service.getDrugList(params.loadSize.toLong(), currentKey).execute()
+            val drugs = response.body()
+            val nextKey = if (drugs.isNullOrEmpty()) {
+                null
+            } else {
+                (currentKey + params.loadSize)
+            }
 
-        val prevKey = if (currentKey == 0L) null
-        else currentKey - params.loadSize
+            val prevKey = if (currentKey == 0L) null
+            else currentKey - params.loadSize
 
-        return LoadResult.Page<Long, Drug>(
-            data = drugs.orEmpty(),
-            prevKey = prevKey,
-            nextKey = nextKey
-        )
+            return LoadResult.Page<Long, Drug>(
+                data = drugs.orEmpty(),
+                prevKey = prevKey,
+                nextKey = nextKey
+            )
         } catch (e: Exception) {
             e.printStackTrace()
             return LoadResult.Error(e)

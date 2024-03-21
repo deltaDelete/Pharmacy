@@ -4,10 +4,9 @@
     style="?materialCardViewOutlinedStyle"
     android:layout_weight="1"
     android:foreground="?selectableItemBackground"
-    android:layout_width="wrap_content"
-    app:layout_flexGrow="1"
+    android:layout_width="150dp"
+    app:layout_flexGrow="0"
     app:layout_flexShrink="0"
-    app:layout_flexBasisPercent="50%"
     android:layout_height="wrap_content"
     android:clickable="true">
 
@@ -19,21 +18,20 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/drug_image"
-            android:layout_width="100dp"
-            android:layout_height="100dp" />
+        <TextView
+            android:id="@+id/textview_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
         <TextView
             android:id="@+id/textview_drug_name"
-            android:layout_below="@id/drug_image"
+            android:lineBreakWordStyle="phrase"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Drug name" />
+            android:text="Drug name is very long so it cant fit" />
 
         <TextView
             android:id="@+id/textview_drug_price"
-            android:layout_below="@id/textview_drug_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="0.00 RUBLES" />

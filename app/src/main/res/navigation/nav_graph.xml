@@ -3,26 +3,30 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
+    app:startDestination="@id/StoreFragment">
 
     <fragment
-        android:id="@+id/FirstFragment"
+        android:id="@+id/StoreFragment"
         android:name="ru.deltadelete.pharmacy.ui.store_fragment.StoreFragment"
         android:label="@string/store_fragment_label"
         tools:layout="@layout/fragment_store">
 
         <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
+            android:id="@+id/action_storeFragment_to_drugInfoFragment"
+            app:destination="@id/drugInfoFragment" />
     </fragment>
     <fragment
-        android:id="@+id/SecondFragment"
-        android:name="ru.deltadelete.pharmacy.SecondFragment"
-        android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second">
-
-        <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
+        android:id="@+id/ArrivalFragment"
+        android:name="ru.deltadelete.pharmacy.ui.arrival_fragment.ArrivalFragment"
+        android:label="@string/arrival_fragment_label"
+        tools:layout="@layout/fragment_arrival"/>
+    <fragment
+        android:id="@+id/drugInfoFragment"
+        android:name="ru.deltadelete.pharmacy.ui.drug_info_fragment.DrugInfoFragment"
+        tools:layout="@layout/fragment_drug_info"
+        android:label="@string/info">
+        <argument
+            android:name="item"
+            app:argType="string" />
     </fragment>
 </navigation>

@@ -2,6 +2,7 @@ package ru.deltadelete.pharmacy.paging
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.AdapterView.OnItemClickListener
 import androidx.paging.PagingData
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
@@ -16,6 +17,8 @@ class DrugAdapter
     : PagingDataAdapter<Drug, DrugAdapter.ViewHolder>(
     DrugDiffCallback()
 ) {
+
+    var onItemClick: ((item: Drug, position: Int) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -36,13 +39,12 @@ class DrugAdapter
         private val radius = binding.root.context.resources.getDimension(R.dimen.eight).toInt()
         fun bind(item: Drug?) {
             item?.let {
-                Glide.with(binding.root)
-                    .load(item.image)
-                    .transform(RoundedCorners(radius))
-                    .into(binding.drugImage)
-
+                binding.root.setOnClickListener {
+                    onItemClick?.invoke(item, layoutPosition)
+                }
                 binding.textviewDrugName.text = item.name
-                binding.textviewDrugPrice.text = String.format("%.2f₽", item)
+                binding.textviewId.text = item.id.toString()
+                binding.textviewDrugPrice.text = String.format("%.2f₽", item.price)
             }
         }
     }

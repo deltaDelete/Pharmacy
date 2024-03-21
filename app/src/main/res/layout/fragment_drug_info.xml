@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="@drawable/divider"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:showDividers="middle">
+
+        <TextView
+            android:id="@+id/textview_drug_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/placeholder"
+            android:textAppearance="?textAppearanceTitleLarge" />
+
+        <TextView
+            android:id="@+id/textview_drug_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="100P"
+            android:textAppearance="?textAppearanceTitleMedium" />
+
+        <TextView
+            android:id="@+id/textview_drug_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/lorem_ipsum"
+            android:textAppearance="?textAppearanceBodyLarge" />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_warehouses"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:itemCount="3"
+            tools:listitem="@layout/item_warehouse_stock" />
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>
